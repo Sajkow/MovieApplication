@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
     //My Inner CLASS
     private class fetchData extends Thread {
         String data = "";
-        Integer pages;
 
         @Override
         public void run() {
@@ -119,16 +118,10 @@ public class MainActivity extends AppCompatActivity {
                 if (!data.isEmpty()) {
                     movieList.clear();
                     JSONObject jsonObject = new JSONObject(data);
-                    pages = jsonObject.getInt("total_pages");
+                    totalPages = jsonObject.getInt("total_pages");
                     JSONArray movies = jsonObject.getJSONArray("results");
                     for (int i = 0; i < movies.length(); i++) {
                         JSONObject result = movies.getJSONObject(i);
-
-                        JSONArray genreJSON = result.getJSONArray("genre_ids");
-                        ArrayList<String> genres = new ArrayList<>();
-                        for (int g = 0; g < genreJSON.length(); g++) {
-                            genres.add(genreJSON.getString(g));
-                        }
 
                         URL imageUrl = new URL(MainActivity.this.getResources().getString(R.string.image_address) +
                                 result.getString("poster_path"));
@@ -137,8 +130,6 @@ public class MainActivity extends AppCompatActivity {
                         movieList.add(new Movie(
                                 result.getString("id"),
                                 result.getString("title"),
-                                genres,
-                                result.getString("overview"),
                                 bitmap
                         ));
                     }
@@ -153,10 +144,9 @@ public class MainActivity extends AppCompatActivity {
                     if (progressDialog.isShowing()) {
                         progressDialog.dismiss();
                     }
-                    totalPages = pages;
                     if (pageNumber <= 1) { binding.buttonPreviousPage.setEnabled(false); }
                     else { binding.buttonPreviousPage.setEnabled(true); }
-                    if (pageNumber >= pages) { binding.buttonNextPage.setEnabled(false); }
+                    if (pageNumber >= totalPages) { binding.buttonNextPage.setEnabled(false); }
                     else { binding.buttonNextPage.setEnabled(true); }
                     binding.textviewCurrentPage.setText(pageNumber.toString());
                     listAdapter.notifyDataSetChanged();
@@ -166,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void launchMovieDescription(String movieId) {
-        Log.d("Main received:", movieId);
         Intent intent = new Intent(this, MovieDescriptionActivity.class);
         intent.putExtra(EXTRA_MOVIE_ID, movieId);
         startActivity(intent);

@@ -1,6 +1,5 @@
 package com.example.movieapplication;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +41,6 @@ public class MoviesAdapter extends ArrayAdapter<Movie> {
             public void onClick(View view) {
                 int position = (Integer) view.getTag();
                 Movie movie = getItem(position);
-                Log.d("Clicked on: ", movie.getId());
                 mainActivity.launchMovieDescription(movie.getId());
             }
         });

@@ -1,6 +1,9 @@
 package com.example.movieapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -8,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.os.IResultReceiver;
 import android.util.Log;
 
 import com.example.movieapplication.databinding.ActivityMovieDescriptionBinding;
@@ -28,10 +32,12 @@ import javax.net.ssl.HttpsURLConnection;
 public class MovieDescriptionActivity extends AppCompatActivity {
     private ActivityMovieDescriptionBinding binding;
 
-    private ProgressDialog progressDialog;
+    private RatingAdapter ratingAdapter;
     private Handler mainHandler = new Handler();
+    private ProgressDialog progressDialog;
 
     private Movie movie;
+    private ArrayList<String> movieRating = new ArrayList<>();
     private String language;
     private URL url;
 
@@ -44,11 +50,21 @@ public class MovieDescriptionActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String movieId = intent.getStringExtra(MainActivity.EXTRA_MOVIE_ID);
 
+        initializeAdapter();
         language = getResources().getString(R.string.language_english);
         url = Queries.buildUrlMovieDescription(this, movieId, language);
-        movie = new Movie();
 
         new fetchData().start();
+    }
+
+    private void initializeAdapter() {
+        RecyclerView recyclerView = binding.ratingList;
+        ratingAdapter = new RatingAdapter(movieRating);
+        LinearLayoutManager lManager = new LinearLayoutManager(getApplicationContext());
+        lManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(lManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(ratingAdapter);
     }
 
     //My Inner CLASS
@@ -90,11 +106,14 @@ public class MovieDescriptionActivity extends AppCompatActivity {
                             jsonObject.getString("poster_path"));
                     Bitmap bitmap = BitmapFactory.decodeStream((InputStream) imageUrl.getContent());
 
-                    movie.setTitle(jsonObject.getString("title"));
-                    movie.setGenres(genres);
-                    movie.setOverview(jsonObject.getString("overview"));
-                    movie.setImage(bitmap);
-                    movie.setTagLine(jsonObject.getString("tagline"));
+                    movie = new Movie(
+                            jsonObject.getString("title"),
+                            genres,
+                            jsonObject.getString("overview"),
+                            jsonObject.getString("tagline"),
+                            bitmap,
+                            jsonObject.getDouble("vote_average")
+                    );
                 }
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
@@ -112,6 +131,10 @@ public class MovieDescriptionActivity extends AppCompatActivity {
                     binding.movieDescriptionPoster.setContentDescription("Poster for " + movie.getTitle());
                     binding.movieDescriptionTagline.setText(movie.getTagLine());
                     binding.movieDescriptionOverview.setText(movie.getOverview());
+                    movieRating.clear();
+                    for (String star: movie.getRating()) { movieRating.add(star); }
+                    Log.d(movie.getTitle(), movieRating.toString());
+                    ratingAdapter.notifyDataSetChanged();
                 }
             });
         }

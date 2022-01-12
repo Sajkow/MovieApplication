@@ -1,7 +1,6 @@
 package com.example.movieapplication;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 import java.util.ArrayList;
 
 public class Movie {
@@ -11,22 +10,32 @@ public class Movie {
     private String tagLine;
     private String overview;
     private Bitmap image;
+    private String videoLink;
+    private Double rating;
 
-    public Movie() { }
+    public Movie(String title, Bitmap image) {
+        this.title = title;
+        this.image = image;
+    }
+
+    public Movie(String id, String title, Bitmap image) {
+        this(title, image);
+        this.id = id;
+    }
 
     public Movie(
-            String id,
             String title,
             ArrayList<String> genres,
             String overview,
-            Bitmap image
+            String tagLine,
+            Bitmap image,
+            Double rating
     ) {
-        this.id = id;
-        this.title = title;
+        this(title, image);
         this.genres = genres;
         this.overview = overview;
-        this.image = image;
-        Log.d("Created movie: ", "id" + id + " title: " + title + " genres: " + genres);
+        this.tagLine = tagLine;
+        this.rating = rating;
     }
 
     public void setId(String id) { this.id = id; }
@@ -54,4 +63,26 @@ public class Movie {
 
     public void setTagLine(String tagLine) { this.tagLine = tagLine; }
     public String getTagLine() { return tagLine; }
+
+    public void setRating(Double rating) { this.rating = rating; }
+    //Return a rating at 0.50 increments.
+    public ArrayList<String> getRating() {
+        ArrayList<String> list = new ArrayList<>();
+        Double rest = rating % 1;
+        Double result;
+        boolean halfStar = false;
+
+        if((rest + 0.50) - 1 >= 0.25 && (rest + 0.50) - 1 <= 0.50) {
+            result = Math.ceil(rating);
+        } else if ((rest - 0.50) >= -0.50 && (rest - 0.50) <= -0.25) {
+            result = Math.floor(rating);
+        } else {
+            result = (double) rating.intValue() + 0.50;
+            halfStar = true;
+        }
+
+        for(int i = 0; i < result.intValue(); i++) { list.add("star"); }
+        if (halfStar) { list.add("starHalf"); }
+        return list;
+    }
 }

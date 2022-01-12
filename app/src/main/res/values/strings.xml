@@ -14,4 +14,6 @@
     <string name="main_header_text">Movies</string>
     <string name="movie_description_activity_name">Movie Description</string>
 
+    <string name="icon_star_source">drawable/icon_star</string>
+    <string name="icon_star_half_source">drawable/icon_start_half</string>
 </resources>

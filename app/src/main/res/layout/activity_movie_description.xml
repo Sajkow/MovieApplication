@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
     tools:context=".MovieDescriptionActivity">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal">
             <TextView
                 android:id="@+id/movie_description_header"
                 android:layout_width="match_parent"
@@ -30,7 +31,16 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="SOME MOVIE POSTER"
                 android:background="@android:color/black"
-                android:layout_gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/movie_description_header"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rating_list"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/movie_description_poster"
                 />
             <TextView
                 android:id="@+id/movie_description_genres"
@@ -42,6 +52,7 @@
                 android:textSize="24sp"
                 android:textStyle="italic"
                 android:textColor="@android:color/white"
+                android:layout_below="@id/rating_list"
             />
             <TextView
                 android:id="@+id/movie_description_tagline"
@@ -53,6 +64,7 @@
                 android:textSize="20sp"
                 android:textStyle="italic"
                 android:textColor="@android:color/white"
+                android:layout_below="@id/movie_description_genres"
                 />
 
             <TextView
@@ -64,8 +76,9 @@
                 android:textAlignment="center"
                 android:textSize="16sp"
                 android:textColor="@android:color/white"
+                android:layout_below="@id/movie_description_tagline"
                 />
-        </LinearLayout>
-    </ScrollView>
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
 
-</RelativeLayout>
+</LinearLayout>

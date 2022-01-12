@@ -1,7 +1,6 @@
 package com.example.movieapplication;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -16,7 +15,6 @@ public class Queries {
         pageNumber = "&page=" + pageNumber;
         try {
             URL url = new URL(serverAddress + theme + apiKey + language + pageNumber);
-            Log.d(LOG_KEY, "Resulting URL: " + url.toString());
             return url;
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -31,12 +29,10 @@ public class Queries {
 
         try {
             URL url = new URL(serverAddress + movieId + apiKey + language);
-            Log.d(LOG_KEY, "Resulting URL: " + url.toString());
             return url;
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return null;
         }
     }
-
 }

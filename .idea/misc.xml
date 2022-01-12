@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Users/ssako/AndroidStudioProjects/MovieApplication/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/ssako/AndroidStudioProjects/MovieApplication/app/src/main/res/layout/activity_movie_description.xml" value="0.25" />
+        <entry key="..\:/Users/ssako/AndroidStudioProjects/MovieApplication/app/src/main/res/layout/rating_star_list.xml" value="0.20989583333333334" />
+        <entry key="..\:/Users/ssako/AndroidStudioProjects/MovieApplication/app/src/main/res/layout/rating_start_list.xml" value="0.20989583333333334" />
         <entry key="..\:/Users/ssako/AndroidStudioProjects/MovieApplication/app/src/main/res/layout/title_list.xml" value="0.33" />
       </map>
     </option>
