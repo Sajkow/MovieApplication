@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    tools:context=".MovieDescriptionActivity">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/movie_description_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="Example TITLE"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                />
+            <ImageView
+                android:id="@+id/movie_description_poster"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="SOME MOVIE POSTER"
+                android:background="@android:color/black"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:id="@+id/movie_description_genres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="Action, Thriller"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="italic"
+                android:textColor="@android:color/white"
+            />
+            <TextView
+                android:id="@+id/movie_description_tagline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="TAGLINE!"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                android:textColor="@android:color/white"
+                />
+
+            <TextView
+                android:id="@+id/movie_description_overview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="A lot of overview!"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

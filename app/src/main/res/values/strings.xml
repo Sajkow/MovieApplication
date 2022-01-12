@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Movie Application</string>
+
+    <string name="current_page">1</string>
+    <string name="button_next_text"><![CDATA[>>]]></string>
+    <string name="button_previous_text"><![CDATA[<<]]></string>
+
+    <string name="language_english">en-US</string>
+    <string name="language_norwegian">no-NO</string>
+    <string name="movie_theme_popular">Popular</string>
+    <string name="server_address">https://api.themoviedb.org/3/movie/</string>
+    <string name="image_address">https://image.tmdb.org/t/p/w500</string>
+    <string name="api_key">247334decb2754a4b9b57b3d9eb39317</string>
+    <string name="main_header_text">Movies</string>
+    <string name="movie_description_activity_name">Movie Description</string>
+
+</resources>
