@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     progressDialog = new ProgressDialog(MainActivity.this);
-                    progressDialog.setMessage("Fetching movies, grab some Popcorn!");
+                    progressDialog.setMessage(Utility.getQuote());
                     progressDialog.setCancelable(false);
                     progressDialog.show();
                 }

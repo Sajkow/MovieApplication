@@ -43,6 +43,7 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.MyViewHold
         if (star.equals("star")) {
             holder.iconStar.setImageDrawable(myContext.getResources().getDrawable(R.drawable.icon_star));
         } else {
+            holder.iconStar.getLayoutParams().width = Utility.dpToPixels(10, myContext);
             holder.iconStar.setImageDrawable(myContext.getResources().getDrawable(R.drawable.icon_star_half));
         }
     }
@@ -50,31 +51,5 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.MyViewHold
     public int getItemCount() {
         return movieRating.size();
     }
-
-    /*
-    public RatingAdapter(MovieDescriptionActivity activity, ArrayList<String> stars) {
-        super(activity, 0, stars);
-        this.movieDescriptionActivity = activity;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        // Get the data item for this position
-        String star = getItem(position);
-        // Check if an existing view is being reused, otherwise inflate the view
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.rating_star_list, parent, false);
-        }
-        // Lookup view for data population
-        ImageView iconStar = (ImageView) convertView.findViewById(R.id.rating_star_icon);
-        // Populate the data into the template view using the data object
-        if (star.equals("star")) {
-            iconStar.setImageDrawable(movieDescriptionActivity.getResources().getDrawable(R.drawable.icon_star));
-        } else {
-            iconStar.setImageDrawable(movieDescriptionActivity.getResources().getDrawable(R.drawable.icon_star_half));
-        }
-        // Return the completed view to render on screen
-        return convertView;
-    }*/
 }
 
